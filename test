@@ -1,0 +1,115 @@
+local library = {}
+library.__index = library
+
+writefile("syphon/fonts/main.ttf", game:HttpGet("https://github.com/f1nobe7650/Nebula/raw/refs/heads/main/fs-tahoma-8px.ttf"))
+
+local tahoma = {
+	name = "Tahoma",
+	faces = {
+		{
+			name = "Regular",
+			weight = 400,
+			style = "normal",
+			assetId = getcustomasset("syphon/fonts/main.ttf")
+		}
+	}
+}
+
+if not isfile("syphon/fonts/main_encoded.ttf") then
+	writefile("syphon/fonts/main_encoded.ttf", game:GetService("HttpService"):JSONEncode(tahoma))
+end
+
+local loadedFont = Font.new(getcustomasset("syphon/fonts/main_encoded.ttf"), Enum.FontWeight.Regular)
+
+function library:window(cfg)
+	local self = setmetatable({}, library)
+	local gui = Instance.new("ScreenGui", game.Players.LocalPlayer:WaitForChild("PlayerGui"))
+	gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	local main = Instance.new("Frame", gui)
+	main.Name = "MainFrame"
+	main.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	main.Size = UDim2.new(0, 597, 0, 502)
+	main.Position = UDim2.new(0.338, 0, 0.15, 0)
+
+	local title = Instance.new("TextLabel", main)
+	title.Size = UDim2.new(0, 597, 0, 25)
+	title.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+	title.FontFace = loadedFont
+	title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	title.TextSize = 12
+	title.TextXAlignment = Enum.TextXAlignment.Left
+	title.Text = cfg.name or "Window"
+
+	local padding = Instance.new("UIPadding", title)
+	padding.PaddingLeft = UDim.new(0, 8)
+
+	local tabBar = Instance.new("Frame", main)
+	tabBar.Size = UDim2.new(0, 597, 0, 30)
+	tabBar.Position = UDim2.new(0, 0, 0.049, 0)
+	tabBar.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+
+	local activeTabLine = Instance.new("Frame", tabBar)
+	activeTabLine.BackgroundColor3 = Color3.fromRGB(255, 170, 255)
+	activeTabLine.Position = UDim2.new(0, 0, 1, 0)
+	activeTabLine.Size = UDim2.new(0, 120, 0, -1)
+
+	local container = Instance.new("Frame", main)
+	container.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+	container.Position = UDim2.new(0.010, 0, 0.122, 0)
+	container.Size = UDim2.new(0, 585, 0, 435)
+
+	self.gui = gui
+	self.main = main
+	self.tabBar = tabBar
+	self.container = container
+	self.font = loadedFont
+	self.tabs = {}
+
+	function self:tab(tabInfo)
+		local tab = {}
+		local btn = Instance.new("TextButton", tabBar)
+		btn.Size = UDim2.new(0, 120, 0, 30)
+		btn.Text = tabInfo.name
+		btn.FontFace = loadedFont
+		btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+		btn.TextSize = 12
+		btn.BackgroundColor3 = (#self.tabs == 0) and Color3.fromRGB(15, 15, 15) or Color3.fromRGB(255, 255, 255)
+		btn.BackgroundTransparency = (#self.tabs == 0) and 0 or 1
+		btn.Position = UDim2.new(0.201 * #self.tabs, 0, 0, 0)
+
+		local tabFrame = Instance.new("Frame", container)
+		tabFrame.Size = UDim2.new(1, 0, 1, 0)
+		tabFrame.BackgroundTransparency = 1
+		tabFrame.Visible = (#self.tabs == 0)
+
+		function tab:section(pos)
+			local sec = Instance.new("Frame", tabFrame)
+			sec.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+			sec.Position = (pos == "left") and UDim2.new(0.01, 0, 0.01, 0) or UDim2.new(0.508, 0, 0.01, 0)
+			sec.Size = UDim2.new(0, 282, 0, 423)
+			return sec
+		end
+
+		btn.MouseButton1Click:Connect(function()
+			for i, v in ipairs(self.tabs) do
+				v.btn.BackgroundTransparency = 1
+				v.btn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				v.tabFrame.Visible = false
+			end
+			btn.BackgroundTransparency = 0
+			btn.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+			tabFrame.Visible = true
+			activeTabLine.Position = UDim2.new(btn.Position.X.Scale, 0, 1, 0)
+		end)
+
+		tab.btn = btn
+		tab.tabFrame = tabFrame
+		table.insert(self.tabs, tab)
+		return tab
+	end
+
+	return self
+end
+
+return library
