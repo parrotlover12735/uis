@@ -53,20 +53,20 @@ function library:window(cfg)
 	padding.PaddingLeft = UDim.new(0, 8)
 
 	local tabBar = Instance.new("Frame", main)
-	tabBar.Size = UDim2.new(0, 597, 0, 26)
+	tabBar.Size = UDim2.new(0, 597, 0, 25)
 	tabBar.Position = UDim2.new(0, 0, 0, 25)
 	tabBar.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 	applyStroke(tabBar)
 
 	local activeTabLine = Instance.new("Frame", tabBar)
 	activeTabLine.BackgroundColor3 = Color3.fromRGB(255, 170, 255)
-	activeTabLine.Position = UDim2.new(0, 0, 1, 0)
-	activeTabLine.Size = UDim2.new(0, 80, 0, -1)
+	activeTabLine.Position = UDim2.new(0, 0, 1, -1)
+	activeTabLine.Size = UDim2.new(0, 80, 0, 1)
 	applyStroke(activeTabLine)
 
 	local container = Instance.new("Frame", main)
 	container.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-	container.Position = UDim2.new(0.010, 0, 0, 55)
+	container.Position = UDim2.new(0.010, 0, 0, 50)
 	container.Size = UDim2.new(0, 585, 0, 440)
 	applyStroke(container)
 
@@ -81,14 +81,14 @@ function library:window(cfg)
 		local tab = {}
 		local tabWidth = 80
 		local btn = Instance.new("TextButton", tabBar)
-		btn.Size = UDim2.new(0, tabWidth, 1, 0)
+		btn.Size = UDim2.new(0, tabWidth, 0, 20)
+		btn.Position = UDim2.new(0, tabWidth * #self.tabs, 0, 2.5)
 		btn.Text = tabInfo.name
 		btn.FontFace = loadedFont
 		btn.TextColor3 = Color3.fromRGB(255, 255, 255)
 		btn.TextSize = 12
 		btn.BackgroundColor3 = (#self.tabs == 0) and Color3.fromRGB(15, 15, 15) or Color3.fromRGB(255, 255, 255)
 		btn.BackgroundTransparency = (#self.tabs == 0) and 0 or 1
-		btn.Position = UDim2.new(0, tabWidth * #self.tabs, 0, 0)
 		applyStroke(btn)
 
 		local tabFrame = Instance.new("Frame", container)
@@ -115,7 +115,7 @@ function library:window(cfg)
 			btn.BackgroundTransparency = 0
 			btn.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 			tabFrame.Visible = true
-			activeTabLine.Position = UDim2.new(0, btn.Position.X.Offset, 1, 0)
+			activeTabLine.Position = UDim2.new(0, btn.Position.X.Offset, 1, -1)
 		end)
 
 		tab.btn = btn
