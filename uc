@@ -842,7 +842,7 @@ do
 		AccentOutline.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		AccentOutline.ClipsDescendants = false
 		AccentOutline.Position = UDim2.new(0.5, 0, 0.5, 0)
-		AccentOutline.Size = UDim2.new(0, 545, 0, 660)
+		AccentOutline.Size = UDim2.new(0, 900, 0, 1000)
 		AccentOutline.ZIndex = 2
 		AccentOutline.Text = ""
 		AccentOutline.AutoButtonColor = false
