@@ -1441,6 +1441,10 @@ function group:addTextbox(args)
     box.TextStrokeTransparency = 0.000
     box.TextXAlignment = Enum.TextXAlignment.Left
 
+	local UIPadding = Instance.new("UIPadding")
+	UIPadding.Parent = box
+	UIPadding.PaddingLeft = UDim.new(0, 8)
+
     gradient.Color = ColorSequence.new{
         ColorSequenceKeypoint.new(0.00, Color3.fromRGB(59, 59, 59)),
         ColorSequenceKeypoint.new(1.00, Color3.fromRGB(83, 83, 83))
