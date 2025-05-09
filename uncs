@@ -13,7 +13,7 @@ if not isfile("africabot") then
     makefolder("africabot")
  end
  
- local menu = game:GetObjects("rbxassetid://17587771741")[1] 
+ local menu = game:GetObjects("rbxassetid://132014661820989")[1] 
  local tabholder = menu.bg.bg.bg.bg.bg.bg.main.group;
  local tabviewer = menu.bg.bg.bg.bg.bg.bg.tabbuttons;
  for _, obj in pairs(menu:GetDescendants()) do
@@ -298,7 +298,7 @@ if not isfile("africabot") then
  end
  
  local library = {
-    Title = 'africabot<font color="rgb(74, 74, 74)"></font> | Private',
+    Title = 'africabot',
     keybind = Enum.KeyCode.RightBracket,
     Watermark = createWatermark(),
        Colors = {
