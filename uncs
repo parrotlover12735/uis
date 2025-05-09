@@ -1392,84 +1392,98 @@ if not isfile("africabot") then
                             library.options[args.flag] = { type = "slider", changeState = updateValue, skipflag = args.skipflag, oldargs = args }
                             updateValue(args.value or args.default)
                         end
-                        function group:addTextbox(args)
-                            if not args.flag then return warn("⚠️ incorrect arguments ⚠️") end
-                            groupbox.Size += UDim2.new(0, 0, 0, 35)
+function group:addTextbox(args)
+    if not args.flag then return warn("⚠️ incorrect arguments ⚠️") end
+    groupbox.Size += UDim2.new(0, 0, 0, 35)
 
-                            local textbox = Instance.new("Frame")
-                            local bg = Instance.new("Frame")
-                            local main = Instance.new("ScrollingFrame")
-                            local box = Instance.new("TextBox")
-                            local gradient = Instance.new("UIGradient")
-                            local text = Instance.new("TextLabel")
+    local textbox = Instance.new("Frame")
+    local bg = Instance.new("Frame")
+    local main = Instance.new("ScrollingFrame")
+    local box = Instance.new("TextBox")
+    local gradient = Instance.new("UIGradient")
+    local text = Instance.new("TextLabel")
 
-                            box:GetPropertyChangedSignal('Text'):Connect(function(val)
-                            if library.colorpicking then return end
-                            library.flags[args.flag] = box.Text
-                            args.value = box.Text
-                            if args.callback then
-                                args.callback()
-                            end
-                            end)
-                            textbox.Name = "textbox"
-                            textbox.Parent = grouper
-                            textbox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                            textbox.BackgroundTransparency = 1.000
-                            textbox.BorderSizePixel = 0
-                            textbox.Size = UDim2.new(1, 0, 0, 35)
-                            textbox.ZIndex = 10
+    textbox.Name = "textbox"
+    textbox.Parent = grouper
+    textbox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    textbox.BackgroundTransparency = 1.000
+    textbox.BorderSizePixel = 0
+    textbox.Size = UDim2.new(1, 0, 0, 35)
+    textbox.ZIndex = 10
 
-                            bg.Name = "bg"
-                            bg.Parent = textbox
-                            bg.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
-                            bg.BorderColor3 = Color3.fromRGB(2, 2, 2)
-                            bg.BorderSizePixel = 2
-                            bg.Position = UDim2.new(0.02, -1, 0, 16)
-                            bg.Size = UDim2.new(0, 205, 0, 15)
+    bg.Name = "bg"
+    bg.Parent = textbox
+    bg.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+    bg.BorderColor3 = Color3.fromRGB(2, 2, 2)
+    bg.BorderSizePixel = 2
+    bg.Position = UDim2.new(0.02, -1, 0, 16)
+    bg.Size = UDim2.new(0, 205, 0, 15)
 
-                            main.Name = "main"
-                            main.Parent = bg
-                            main.Active = true
-                            main.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
-                            main.BorderColor3 = Color3.fromRGB(12, 12, 12)
-                            main.Size = UDim2.new(1, 0, 1, 0)
-                            main.CanvasSize = UDim2.new(0, 0, 0, 0)
-                            main.ScrollBarThickness = 0
+    main.Name = "main"
+    main.Parent = bg
+    main.Active = true
+    main.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+    main.BorderColor3 = Color3.fromRGB(12, 12, 12)
+    main.Size = UDim2.new(1, 0, 1, 0)
+    main.CanvasSize = UDim2.new(0, 0, 0, 0)
+    main.ScrollBarThickness = 0
 
-                            box.Name = "box"
-                            box.Parent = main
-                            box.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                            box.BackgroundTransparency = 1.000
-                            box.Selectable = false
-                            box.Size = UDim2.new(1, 0, 1, 0)
-                            box.FontFace = Fonts.ProggyTiny
-                            box.Text = args.value or ""
-                            box.TextColor3 = Color3.fromRGB(255, 255, 255)
-                            box.TextSize = 9
-                            box.TextStrokeTransparency = 0.000
-                            box.TextXAlignment = Enum.TextXAlignment.Left
+    box.Name = "box"
+    box.Parent = main
+    box.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    box.BackgroundTransparency = 1.000
+    box.Selectable = false
+    box.Size = UDim2.new(1, 0, 1, 0)
+    box.FontFace = Fonts.ProggyTiny
+    box.Text = args.value or ""
+    box.TextColor3 = Color3.fromRGB(255, 255, 255)
+    box.TextSize = 9
+    box.TextStrokeTransparency = 0.000
+    box.TextXAlignment = Enum.TextXAlignment.Left
 
-                            gradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(59, 59, 59)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(83, 83, 83))}
-                            gradient.Rotation = 90
-                            gradient.Name = "gradient"
-                            gradient.Parent = main
+    gradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(59, 59, 59)),
+        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(83, 83, 83))
+    }
+    gradient.Rotation = 90
+    gradient.Name = "gradient"
+    gradient.Parent = main
 
-                            text.Name = "text"
-                            text.Parent = textbox
-                            text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                            text.BackgroundTransparency = 1.000
-                            text.Position = UDim2.new(0.0299999993, -1, 0, 7)
-                            text.ZIndex = 2
-                            text.FontFace = Fonts.ProggyTiny
-                            text.Text = args.text or args.flag
-                            text.TextColor3 = Color3.fromRGB(244, 244, 244)
-                            text.TextSize = 9
-                            text.TextStrokeTransparency = 0.000
-                            text.TextXAlignment = Enum.TextXAlignment.Left
+    text.Name = "text"
+    text.Parent = textbox
+    text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    text.BackgroundTransparency = 1.000
+    text.Position = UDim2.new(0.03, -1, 0, 7)
+    text.ZIndex = 2
+    text.FontFace = Fonts.ProggyTiny
+    text.Text = args.text or args.flag
+    text.TextColor3 = Color3.fromRGB(244, 244, 244)
+    text.TextSize = 9
+    text.TextStrokeTransparency = 0.000
+    text.TextXAlignment = Enum.TextXAlignment.Left
 
-                            library.flags[args.flag] = args.value or ""
-                            library.options[args.flag] = {type = "textbox",changeState = function(text) box.Text = text end,skipflag = args.skipflag,oldargs = args}
-                        end
+    box:GetPropertyChangedSignal("Text"):Connect(function()
+        if library.colorpicking then return end
+        library.flags[args.flag] = box.Text
+        args.value = box.Text
+        if args.callback then
+            args.callback(box.Text)
+        end
+    end)
+
+    library.flags[args.flag] = args.value or ""
+    library.options[args.flag] = {
+        type = "textbox",
+        changeState = function(val)
+            box.Text = val
+            library.flags[args.flag] = val
+            args.value = val
+        end,
+        skipflag = args.skipflag,
+        oldargs = args
+    }
+end
+
                         function group:addDivider(args)
                             groupbox.Size += UDim2.new(0, 0, 0, 10)
 
