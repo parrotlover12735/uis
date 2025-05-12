@@ -102,18 +102,31 @@ function library:Window()
     local pad3 = Instance.new("UIPadding", TextLabel3)
     pad3.PaddingLeft = UDim.new(0, 11)
 
-    function win:AddTab(tabName)
-        local tab = Instance.new("TextLabel", self.TabContainer)
-        tab.Size = UDim2.new(0, 120, 0, 30)
-        tab.BackgroundTransparency = 1
-        tab.TextXAlignment = Enum.TextXAlignment.Left
-        tab.FontFace = library.font
-        tab.TextColor3 = Color3.fromRGB(170, 170, 170)
-        tab.TextSize = 9
-        tab.TextStrokeTransparency = 0
-        tab.Text = "   " .. tabName
-        return tab
-    end
+function win:AddTab(tabName, imageUrl)
+    local tab = Instance.new("Frame", self.TabContainer)
+    tab.Size = UDim2.new(1, 0, 0, 70)
+    tab.BackgroundTransparency = 1
+
+    local icon = Instance.new("ImageLabel", tab)
+    icon.Size = UDim2.new(0, 30, 0, 30)
+    icon.Position = UDim2.new(0.5, -15, 0, 5)
+    icon.BackgroundTransparency = 1
+    icon.Image = imageUrl
+
+    local label = Instance.new("TextLabel", tab)
+    label.Size = UDim2.new(1, 0, 0, 20)
+    label.Position = UDim2.new(0, 0, 0, 40)
+    label.BackgroundTransparency = 1
+    label.Text = tabName
+    label.TextColor3 = Color3.fromRGB(170, 170, 170)
+    label.TextSize = 9
+    label.TextStrokeTransparency = 0
+    label.FontFace = library.font
+    label.TextXAlignment = Enum.TextXAlignment.Center
+
+    return tab
+end
+
 
     return win
 end
