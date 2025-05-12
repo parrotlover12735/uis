@@ -34,12 +34,21 @@ function library:Window()
     win.Main.Position = UDim2.new(0.241765484, 0, 0.11691542, 0)
     win.Main.Size = UDim2.new(0, 716, 0, 543)
 
-    win.TabContainer = Instance.new("Frame", win.Main)
-    win.TabContainer.Name = "TabContainer"
-    win.TabContainer.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
-    win.TabContainer.BorderColor3 = Color3.fromRGB(30, 30, 30)
-    win.TabContainer.Position = UDim2.new(0.00909091346, 0, 0.0125000672, 0)
-    win.TabContainer.Size = UDim2.new(0, 120, 0, 530)
+win.TabContainer = Instance.new("ScrollingFrame", win.Main)
+win.TabContainer.Name = "TabContainer"
+win.TabContainer.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+win.TabContainer.BorderColor3 = Color3.fromRGB(30, 30, 30)
+win.TabContainer.Position = UDim2.new(0.009, 0, 0.012, 0)
+win.TabContainer.Size = UDim2.new(0, 120, 0, 530)
+win.TabContainer.CanvasSize = UDim2.new(0, 0, 0, 0)
+win.TabContainer.ScrollBarThickness = 4
+win.TabContainer.AutomaticCanvasSize = Enum.AutomaticSize.Y
+win.TabContainer.ScrollBarImageColor3 = Color3.fromRGB(60, 60, 60)
+
+local tabLayout = Instance.new("UIListLayout", win.TabContainer)
+tabLayout.SortOrder = Enum.SortOrder.LayoutOrder
+tabLayout.Padding = UDim.new(0, 4)
+
 
     win.SectionContainer = Instance.new("Frame", win.Main)
     win.SectionContainer.Name = "SectionContainer"
@@ -126,7 +135,6 @@ function win:AddTab(tabName, imageUrl)
 
     return tab
 end
-
 
     return win
 end
