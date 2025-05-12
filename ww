@@ -1,0 +1,121 @@
+local library = {}
+
+writefile("syphon/fonts/main.ttf", game:HttpGet("https://github.com/i77lhm/storage/raw/refs/heads/main/fonts/ProggyTiny.ttf"))
+
+local ProggyTiny = {
+    name = "ProggyTiny",
+    faces = {
+        {
+            name = "Regular",
+            weight = 400,
+            style = "normal",
+            assetId = getcustomasset("syphon/fonts/main.ttf")
+        }
+    }
+}
+
+if not isfile("syphon/fonts/main_encoded.ttf") then
+    writefile("syphon/fonts/main_encoded.ttf", game:GetService("HttpService"):JSONEncode(ProggyTiny))
+end
+
+library.font = Font.new(getcustomasset("syphon/fonts/main_encoded.ttf"), Enum.FontWeight.Regular)
+
+function library:Window()
+    local win = {}
+
+    win.Gui = Instance.new("ScreenGui", game.Players.LocalPlayer:WaitForChild("PlayerGui"))
+    win.Gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+    win.Main = Instance.new("Frame", win.Gui)
+    win.Main.Name = "MainFrame"
+    win.Main.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+    win.Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    win.Main.BorderSizePixel = 0
+    win.Main.Position = UDim2.new(0.241765484, 0, 0.11691542, 0)
+    win.Main.Size = UDim2.new(0, 716, 0, 543)
+
+    win.TabContainer = Instance.new("Frame", win.Main)
+    win.TabContainer.Name = "TabContainer"
+    win.TabContainer.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+    win.TabContainer.BorderColor3 = Color3.fromRGB(30, 30, 30)
+    win.TabContainer.Position = UDim2.new(0.00909091346, 0, 0.0125000672, 0)
+    win.TabContainer.Size = UDim2.new(0, 120, 0, 530)
+
+    win.SectionContainer = Instance.new("Frame", win.Main)
+    win.SectionContainer.Name = "SectionContainer"
+    win.SectionContainer.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+    win.SectionContainer.BorderColor3 = Color3.fromRGB(30, 30, 30)
+    win.SectionContainer.Position = UDim2.new(0.200000107, 0, 0.0125002926, 0)
+    win.SectionContainer.Size = UDim2.new(0, 566, 0, 530)
+
+    win.LeftSection = Instance.new("Frame", win.SectionContainer)
+    win.LeftSection.Name = "LeftSection"
+    win.LeftSection.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+    win.LeftSection.BorderColor3 = Color3.fromRGB(30, 30, 30)
+    win.LeftSection.Position = UDim2.new(0.0114942351, 0, 0.0128477849, 0)
+    win.LeftSection.Size = UDim2.new(0, 175, 0, 515)
+
+    local TextLabel = Instance.new("TextLabel", win.LeftSection)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.Size = UDim2.new(0, 163, 0, 30)
+    TextLabel.FontFace = library.font
+    TextLabel.TextColor3 = Color3.fromRGB(170, 170, 170)
+    TextLabel.TextSize = 9
+    TextLabel.TextStrokeTransparency = 0
+    TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+    local pad = Instance.new("UIPadding", TextLabel)
+    pad.PaddingLeft = UDim.new(0, 11)
+
+    win.CenterSection = Instance.new("Frame", win.SectionContainer)
+    win.CenterSection.Name = "CenterSection"
+    win.CenterSection.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+    win.CenterSection.BorderColor3 = Color3.fromRGB(30, 30, 30)
+    win.CenterSection.Position = UDim2.new(0.34467867, 0, 0.0128479004, 0)
+    win.CenterSection.Size = UDim2.new(0, 175, 0, 515)
+
+    local TextLabel2 = Instance.new("TextLabel", win.CenterSection)
+    TextLabel2.BackgroundTransparency = 1
+    TextLabel2.Size = UDim2.new(0, 163, 0, 30)
+    TextLabel2.FontFace = library.font
+    TextLabel2.TextColor3 = Color3.fromRGB(170, 170, 170)
+    TextLabel2.TextSize = 9
+    TextLabel2.TextStrokeTransparency = 0
+    TextLabel2.TextXAlignment = Enum.TextXAlignment.Left
+    local pad2 = Instance.new("UIPadding", TextLabel2)
+    pad2.PaddingLeft = UDim.new(0, 11)
+
+    win.RightSection = Instance.new("Frame", win.SectionContainer)
+    win.RightSection.Name = "RightSection"
+    win.RightSection.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+    win.RightSection.BorderColor3 = Color3.fromRGB(30, 30, 30)
+    win.RightSection.Position = UDim2.new(0.679778755, 0, 0.0128479004, 0)
+    win.RightSection.Size = UDim2.new(0, 175, 0, 515)
+
+    local TextLabel3 = Instance.new("TextLabel", win.RightSection)
+    TextLabel3.BackgroundTransparency = 1
+    TextLabel3.Size = UDim2.new(0, 163, 0, 30)
+    TextLabel3.FontFace = library.font
+    TextLabel3.TextColor3 = Color3.fromRGB(170, 170, 170)
+    TextLabel3.TextSize = 9
+    TextLabel3.TextStrokeTransparency = 0
+    TextLabel3.TextXAlignment = Enum.TextXAlignment.Left
+    local pad3 = Instance.new("UIPadding", TextLabel3)
+    pad3.PaddingLeft = UDim.new(0, 11)
+
+    function win:AddTab(tabName)
+        local tab = Instance.new("TextLabel", self.TabContainer)
+        tab.Size = UDim2.new(0, 120, 0, 30)
+        tab.BackgroundTransparency = 1
+        tab.TextXAlignment = Enum.TextXAlignment.Left
+        tab.FontFace = library.font
+        tab.TextColor3 = Color3.fromRGB(170, 170, 170)
+        tab.TextSize = 9
+        tab.TextStrokeTransparency = 0
+        tab.Text = "   " .. tabName
+        return tab
+    end
+
+    return win
+end
+
+return library
