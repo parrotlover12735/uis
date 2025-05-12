@@ -117,7 +117,7 @@ function win:AddTab(tabName, imageUrl)
     tab.BackgroundTransparency = 1
 
     local icon = Instance.new("ImageLabel", tab)
-    icon.Size = UDim2.new(0, 30, 0, 30)
+    icon.Size = UDim2.new(0, 60, 0, 60)
     icon.Position = UDim2.new(0.5, -15, 0, 5)
     icon.BackgroundTransparency = 1
     icon.Image = imageUrl
